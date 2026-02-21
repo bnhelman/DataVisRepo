@@ -34,25 +34,8 @@
 		</section>
 
 		<section>
-			<h2>Overview and Introduction to the Data</h2>
-			<figure>
-				<img src="images/Price_Map.png" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="images/Price_Map.png" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-		</section>
-
-		<section>
 			<h2>Data Cleaning Summary</h2>
-			<h4>Only the most important points are listed here for brevity and readability. Full details and justifications for the data manipulations are in Appendix A. Individual sections have their own cleanings if necessary</h4>
+			<h4>Only the most important points are listed here for brevity and readability. Full details and justifications for the data manipulations are in Appendix A. Individual sections have their own cleanings if necessary.</h4>
 			<ol>
 				<li>Prices below $10,000 were filtered out as outlier or family transactions</li>
 				<li>Excluded properties with latitudes and longitudes outside of Boston (See Appendix A and the note on spatial transformations below)</li>
@@ -62,8 +45,8 @@
 			<h3>Advanced Data Transformations</h3>
 			<ol>
 				<li>
-					Latitude and Longitude Recovery: There were ~450 entries where the latitude and longitudes were entered as (0, 0). I noted that these were legitimate purchases and that there was a correlation with their price and zip code.
-					removing them would have introduced a statistical bias because of this correlation. Therefore, I generated corrected latitudes and longitudes for these properties using their address as a reference and updated their entries.
+					Latitude and Longitude Recovery: There were ~450 entries where the latitude and longitudes were entered as (0, 0). I determined that these were likely legitimate purchases by checking their address against their zip, then seeing if the price was reasonable for a sample. I noticed that an entry having a (0, 0) was correlated with their price and zip code.
+					Removing them would have introduced a statistical bias because of this correlation and the number of entries. Therefore, I generated corrected latitudes and longitudes for these properties using their address as a reference and updated their entries.
 				</li>
 				<li>
 					Inflation Adjustment: The prices were at time of sale, which means that if I want to fairly compare (real) prices across different years, then I must adjust for inflation.
@@ -74,31 +57,98 @@
 		</section>
 
 		<section>
+			<h2>Overview and Introduction to the Data</h2>
+			<p>
+				Let's look at all the points from a more familiar lens, the Boston Map. We can then understand how the data is spread out in space and get a useful reference point for the following analysis.
+				If we mark the prices, we should be able to see some trends we might expect like expensive high rises near Downtown Crossing/Government Center. 
+			</p>
+			<figure>
+				<img src="images/Price_Map.png" alt="" />
+				<figcaption>
+				Map of Boston overlayed with property purchases and their price distribution. Larger, redder circles represent larger purchases to help reweight the data by cash and contrast expensive vs inexpensive areas.
+				Represents the whole dataset from 2000-2022 (minus filters discussed above). The data is mostly between Fenway and the Downtown Waterfront, and north of South End. Many notable areas like Allston, South Boston, parts of West End, and Sea Port
+				are not represented in the data.
+				</figcaption>
+			</figure>
+
+			<p>
+				And yes, it appears that we can note some trends we might expect from a Boston real estate map. Downtown Crossing and Government center are notably expensive, and the areas of North End and the transition to South End are cheaper.
+				However, many neighborhoods have very little data in this dataset. In general, the data represented focuses on the most urban areas of the city.
+			</p>
+
+			<h4>How does the Market Trend? And how does it compare to Inflation?</h4>
+			<p>
+				We expect housing to be getting more and more expensive year after year. This is one of the most common analyses done, but let's ask how it relates to my questions. One can look at housing prices as a place to live or as an investor. 
+				If you're looking at housing prices as a place to live, then price increases signal that it's becoming increasingly difficult to afford a house. However, some of my questions relate to investors, so I would like to visualize prices
+				in a way an investor would look at them. From my personal experiences, investors care about how assets appreciate and how this compares to inflation. So let's investigate house prices in Boston through the lens of appreciating assets instead of places to live.
+			</p>
+
+			<figure>
+				<img src="images/Price_Line_Chart.png" alt="" />
+				<figcaption>
+				Increases in median housing price in the Boston area over time. The darker green curve has been adjusted for inflation to yr 2000s dollars (i.e real price) while the lighter green curve was not adjusted for inflation (i.e nominal price).
+				The shaded distance between the green curves and the black horizontal reference line gives the appreciation the median house has experienced since 2000.
+				The shaded region between the light and dark green curves represent the nominal appreciation that can be attributed solely to inflation.
+				We can conclude that real estate has appreciated relatively steadily since 2000, even accounting for inflation. An investor would care about the
+				real return on investment (real ROI), which would have been 80% in total over the 22 years.
+				</figcaption>
+			</figure>
+
+			<p>
+				The idea of a house as an appreciating asset rather than a place to live is a key idea for investors. This is of course why housing investment is popular in the
+				first place. Not only does the asset appreciate, it also pays dividends in rent collection.
+			</p>
+
+			<p>
+				If we want to think about houses as a currency of sorts, we should understand how the denominations are distributed. How are properties broken down by price? 
+			</p>
+
+			<figure>
+				<img src="images/General Distribution of housing prices.png" alt="" />
+				<figcaption>
+					Number of distinct properties broken down by price bin. The size and color of each bubble corresponds to the number of distinct addresses falling into that bin. If an address was bought multiple
+					times, then the most recent value after being adjusted for inflation was used. Surprising to see an uptick in the $1,000,000-$5,000,000 group, but likely the values are too spread.
+				</figcaption>
+			</figure>
+
+			<figure>
+				<img src="images/Tot_owned_market_share.png" alt="" />
+				<figcaption>
+				Breakdown of money spent in the real estate market by number of houses owned (including purchase). The size and color of the box corresponds to the total amount of money each group of people spent from 2000 to 2022. 
+				We see that most of the purchases are done by entities buying their only property. However, all entities who own 2 homes at some point purchased 1 home previously, so we expect single home owners to be 
+				over represented. Additionally, many people sell their home to buy another one, which also inflates the single ownership.
+				</figcaption>
+			</figure>
+
+			<p>
+				Okay, so while entities often own just one home, we don't know who the entities are yet. An entity that owns 5 homes could be a medium investor or simply a profoundly wealthy individual.
+				We should understand how the market breaks down along those lines so we know who is actually doing the buying. It is also interesting to see how these trends change over time. From the
+				readings, we should expect large institutional investors like Freddie Mac and Fannie Mae to be buying in big. Maybe this will give us a clue into my question on how Freddie Mac and Fannie Mae are operating in Boston.
+			</p>
+
+			<figure>
+				<img src="images/Investor Market Share adj.png"" alt="" />
+				<figcaption>
+				Investor vs Non-Investor Purchasing. The categories of investors have been broken down by color into small, medium, large, and institutional based on the MAPC criteria listed in their article. In brief, investors
+				are categorized by meeting either a minimum number of houses owned or minimum cash spent. The length of the bar represents the amount of money spent by that group in the year bin. The data has been broken out by time bins of 5 years. The years 2020-2022 have been excluded because 
+				they would be underrepresented in a total due to only having 3 years of purchasing.
+				</figcaption>
+			</figure>
+
+		</section>
+
+		<section>
 			<h2>Investor Flows</h2>
 
 			<figure>
-				<img src="images/Investor_Cash_Flows_1.png" alt="" />
+				<img src="images/Investor_Flows_1.png" alt="" />
 				<figcaption>
 				ENTER IMAGE CAPTION HERE.
 				</figcaption>
 			</figure>
 
 						<figure>
-				<img src="images/Investor_Cash_Flows_2.png" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-						<figure>
-				<img src="images/Investor_Property_Flows_1.png" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="images/Investor_Property_Flows_2.png" alt="" />
+				<img src="images/Investor_Flows_2.png" alt="" />
 				<figcaption>
 				ENTER IMAGE CAPTION HERE.
 				</figcaption>
@@ -110,11 +160,19 @@
 			<h2>Flipping</h2>
 
 			<figure>
+				<img src="images/Flipping_Map.png" alt="" />
+				<figcaption>
+				ENTER IMAGE CAPTION HERE.
+				</figcaption>
+			</figure>
+
+			<figure>
 				<img src="images/Bar_Flipping.png" alt="" />
 				<figcaption>
 				ENTER IMAGE CAPTION HERE.
 				</figcaption>
 			</figure>
+
 
 			<figure>
 				<img src="images/Pie Charts.png" alt="" />
@@ -126,24 +184,24 @@
 		</section>
 
 		<section>
-			<h2>Discoveries & Insights</h2>
+			<h2>Influence of Freddie Mac and Fannie Mae</h2>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="images/GSE_Low_Numbers.png" alt="" />
 				<figcaption>
 				ENTER IMAGE CAPTION HERE.
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="images/GSE_Timeline.png" alt="" />
 				<figcaption>
 				ENTER IMAGE CAPTION HERE.
 				</figcaption>
 			</figure>
 
 			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
+				<img src="images/GSE_Sales.png" alt="" />
 				<figcaption>
 				ENTER IMAGE CAPTION HERE.
 				</figcaption>
