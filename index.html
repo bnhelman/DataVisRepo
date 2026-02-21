@@ -23,13 +23,13 @@
 			<h3>Overall Analysis Questions</h3>
 			<ol>
 				<li> How does money flow differently between the different sized investors? How is property distributed?</li>
-					<p>I would expect institutional and large investors to be buying up a lot of properties since the article said “Institutional and large investors are
+					<p>I would expect institutional and large investors to be buying up a lot of properties from MAPC's article saying, “Institutional and large investors are
 						buying up large swaths of properties at a discount and flipping them at a premium, further adding to the rapid increases in prices around the region”
 						(MAPC, https://homesforprofit.mapc.org/report). But we don’t get an idea about small and medium investors and how the interact with non-investors. Also we don’t know what happens in this submarket, do things flow through all channels or do firms only trade with others of their size?</p>
 				<li>Are specific homes more likely to be commodified than others in a time correlated way? Is there some transition point where once a property is commodified by getting flipped once, then that house continues to be used as a commodity? In other words, does an investor purchase set off a cascade of further investor purchases?</li>
 					<p>After flipping, the price is higher than it once was, pricing out regular people. This comes from the idea that, “We see the large gap in median prices start to form after the Great Recession and peak in 2020. Second, homes that are flipped are re-sold at a higher price, significantly higher when an investor is doing the flipping (as shown in Figure 19). These dynamics combined—purchasing at a discount and flipping at a profit—make it hard, if not impossible, for an average family to purchase in the market.” (MAPC, https://homesforprofit.mapc.org/report). Is it then true that the people who would be willing and able to buy these houses are primarily other investment firms? The expectation would be that once a house is flipped, it moves primarily between investors. Additionally, since “investors are likely to purchase properties from the existing housing stock instead of more expensive new construction. This further leads to the existing, more naturally affordable housing stock moving out of reach for the typical buyer.” (MAPC, https://homesforprofit.mapc.org/report). So does a submarket of these homes exist?</p>
-				<li>What impact does Freddie and Fannie Mac have on wealth contraction in the Boston Housing Market? How is the liquidity actually being provided to the market?</li>
-				<li>...</li>
+				<li>What impact does Freddie Mac and Fannie Mae have on wealth contraction in the Boston Housing Market? How is the liquidity actually being provided to the market?</li>
+					<p>In the propublica article, there is tension between what Freddie Mac claims to do and what it actually does in practice. For example, the article simultaneously says, “A Freddie Mac spokesperson said that more than 95% of rental units backed by loans Freddie has purchased deliver market-rate rents that are affordable to low-, very-low- and middle-income households” while also claiming, “Private Equity Firms Were Behind 85% of Freddie Mac’s Biggest Apartment Complex Deals”  (Vogell, https://www.propublica.org/article/when-private-equity-becomes-your-landlord). So I should be able to verify one of the statements independently using the actual Boston housing data. Does the spokesperson’s claims misrepresent reality in the Boston market?</p>
 			</ol>
 		</section>
 
@@ -48,6 +48,29 @@
 				ENTER IMAGE CAPTION HERE.
 				</figcaption>
 			</figure>
+		</section>
+
+		<section>
+			<h2>Data Cleaning Summary</h2>
+			<h4>Only the most important points are listed here for brevity and readability. Full details and justifications for the data manipulations are in Appendix A. Individual sections have their own cleanings if necessary</h4>
+			<ol>
+				<li>Prices below $10,000 were filtered out as outlier or family transactions</li>
+				<li>Excluded properties with latitudes and longitudes outside of Boston (See Appendix A and the note on spatial transformations below)</li>
+				<li>Verified the existence of $100M+ purchases as legitimate by address</li>
+				<li>Noted that many sales included a buyer with 0 owned properties. Determined these were likely legitimate purchases from unknown/untracked buyers and not first time buyers (see Appendix A). Left these in, but removed them in 1 notable visualization</li>
+			</ol>
+			<h3>Advanced Data Transformations</h3>
+			<ol>
+				<li>
+					Latitude and Longitude Recovery: There were ~450 entries where the latitude and longitudes were entered as (0, 0). I noted that these were legitimate purchases and that there was a correlation with their price and zip code.
+					removing them would have introduced a statistical bias because of this correlation. Therefore, I generated corrected latitudes and longitudes for these properties using their address as a reference and updated their entries.
+				</li>
+				<li>
+					Inflation Adjustment: The prices were at time of sale, which means that if I want to fairly compare (real) prices across different years, then I must adjust for inflation.
+					I retrieved the CPI-U for our dates using a base year of 2000 dollars. Then I adjusted every entry using the CPI for that entry's year and month. I didn't interpolate for the day.
+					I did not adjust the profits from each sale or the annularized values, but I also did not use this data in my visualizations.
+				</li>
+			</ol>
 		</section>
 
 		<section>
