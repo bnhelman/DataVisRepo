@@ -233,81 +233,71 @@
 				Based on the propublica article, I was expecting that there would be a huge number of Freddie Mac and Freddie Mae properties. For example, the article says that Freddie Mac and Fannie Mae participated in many deals in recent years that
 				were, "The deals were massive, involving thousands of apartments and multiple states" (propublica, https://www.propublica.org/article/when-private-equity-becomes-your-landlord). So where are all those houses?
 				It's not just that there are a small number of purchases in recent years, there are absolutely 0 since 2015. The chances that Freddie Mac and Fannie Mae were purchasing thousands of houses and not one was in this dataset
-				are astronomically low. Something is awry here.
+				are astronomically low. Something is wrong here.
 			</p>
 
 			<p>
-				This line of reasoning led me to 
+				This line of reasoning led me to thinking about what exactly the data represents. I came to understand that the data is talking about direct purchase of the property. Since Freddie Mac and Fannie Mae are intended
+				to buy mortgages in the secondary market, they shouldn't appear as buyers. In fact, they shouldn't appear at all.
+				So now we have the opposite problem, why do we have 34 entries that are labeled as bought by Freddie Mac or Fannie Mae?
+			</p>
+
+			<p>
+				I looked into this further (google + Gemini) and came up with the following explanation. Freddie Mac and Fannie Mae almost never own properties directly. Instead they provide liquidity by purchasing loans on the secondary market. To oversimplify, if they end up with the purchase of a property, something has gone awry. 
+				The owner would have had to default on the mortgage and then the property would have had to have gone through foreclosure (or deed in leiu). Then, the property would have had to have still failed to be purchased at the foreclosure auction beyond the mortgage equity. Then Freddie Mac acquires the property through an REO (Real Estate Owned) transaction. 
+				This is an involuntary process, and is in general undesireable for Freddie Mac and Fannie Mae. (source: initially Gemini, then I fact checked against https://servicing-guide.fanniemae.com/svc/e-4.1-01/notifying-fannie-mae-acquired-property, https://www.fhfa.gov/news/testimony/an-examination-of-the-federal-housing-finance-agencys-real-estate-owned-reo-pilot-program). 
+				There are a lot of subtleties, but in general, homes that are owned by Freddie mac went through foreclosure and were undesireable enough that they were not purchased at foreclosure auction.
+				<b>So the data likely only represents houses who foreclosed AND did not get bought at the foreclosure auction.</b>
+			</p>
+
+			<p>
+				That would explain the uptick following the recession where there were a lot of foreclosures. But it again raises the question of why are there no datapoints after 2015? I again looked into this with a combination of google and Gemini
+				and discovered that Freddie Mac changed their policy for REO in 2015 to get rid of these properties when the loans were not performing (Lane, https://www.housingwire.com/articles/33450-fannie-mae-to-sell-non-performing-loans/).
+				These are called non performing loans (NPLs) and are categorized when the loans are delinquent and are likely to default. The change in policy allowed Freddie Mac and Fannie Mae to sell their NPLs BEFORE the foreclosure process.
+				This led to sell offs of huge numbers of NPLs before they were foreclosed on ( https://www.fanniemae.com/newsroom/fannie-mae-news/fannie-mae-announces-initial-sale-non-performing-loans, https://freddiemac.gcs-web.com/news-releases/news-release-details/freddie-mac-executes-largest-ever-sale-seriously-delinquent/)
+				Therefore, since our signal is only houses that make it all the way past the point of a foreclosure auction, we lose our signal. Let's represent this as a timeline.
 			</p>
 
 			<figure>
 				<img src="images/GSE_Timeline.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Timeline of Direct Freddie Mac and Fannie Mae holdings. The circles are purchases (likely forced through REOs) and the Xs are sales.
+				The blue line represents when the change in policy occured
 				</figcaption>
 			</figure>
+
+			<p>
+				That seems to explain our data very well. If these were due to REOs, we would expect Freddie Mac and Fannie Mae to sell them off very quickly once they got on their books.
+				In general, they're not supposed to be owning these properties directly, so they need to get rid of them. So if we track each address individually, we can locate when it was sold by
+				Freddie Mac or Fannie Mae in time and also see the price. If they are sold very quickly, it's likely the REO hypothesis is correct, but if they're held for long amounts of time,
+				then it's likely Freddie Mac and Fannie Mae were actually intending to hold the properties.
+			</p>
 
 			<figure>
 				<img src="images/GSE_Sales.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Connecting the buy and sell date of all Freddie Mac and Fannie Mae directly owned addresses in the data. In almost all
+				cases, the properties were sold off quickly, which provides support for the REO hypothesis.
 				</figcaption>
 			</figure>
 
-			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="IMAGE_FILENAME" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-		</section>
+			<p>So, if now Freddie Mac and Fannie Mae are selling off their NPLs, who is buying them? This quesition cannot be answered with the dataset by definition,
+				but I looked into this and found agreement with the propublica article. A huge number of these are being bought up by large institutions like Goldman Sachs (https://www.mpamag.com/us/specialty/commercial/goldman-sachs-fannie-maes-biggest-buyer-of-non-performing-loans/63005) 
+				and PE firms (https://freddiemac.gcs-web.com/news-releases/news-release-details/freddie-mac-sells-11-billion-seriously-delinquent-loans/).
+				So, why are large PE investors snapping up thousands of loans which were likely headed to foreclosure? With the explosion of flipping, it's likely they are
+				looking to get in cheap, and resell the house after renovating it.
+			</p>
 
 		<section>
 			<h2>Summary</h2>
 
-			<p>WRITE FINAL SUMMARY HERE.</p>
+			<p>
+
+
+				I was not able to directly answer my question about how Freddie Mac and Fannie Mae are contributing to wealth contraction in Boston because I couldn't find enough data in the dataset. However,
+				I did uncover an oddity in the data which led me to an interesting explanation involving the selloff of delinquent loans to large firms. I believe this practice definitionally fits the bill
+				of increasing wealth inequality because they are transfering assets from people who are struggling to make ends meet to the ultra wealthy.
+			</p>
 		</section>
 
 		<section>
