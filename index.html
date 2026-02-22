@@ -113,7 +113,8 @@
 
 			<p>
 				I've bined the property prices arbitrarily, representing what I think would be reasonable ranges for common different levels of wealth. The most common property sale fell into the $300,000-600,000 range by far.
-				It was surprising to see that there were so many homes for less than $300,000 in geographic areas I typically consider expensive to live in from my personal experience. It was also surprising to see so many $1,000,000-5,000,000
+				It was surprising to see that there were so many homes for less than $300,000 in geographic areas I typically consider expensive to live in from my personal experience. It's likely that many of these sales were purchased in the early 2000s when prices were much lower.
+				It was also surprising to see so many $1,000,000-5,000,000
 				properties. Overall, the properties were well distributed in the bins, indicating that I picked approximately even distributions in property while still giving room for bins which should be less populated such as $20,000,000+.
 			</p>
 
@@ -142,10 +143,14 @@
 				<figcaption>
 				Investor vs Non-Investor Purchasing. The categories of investors have been broken down by color into small, medium, large, and institutional based on the MAPC criteria listed in their article. In brief, investors
 				are categorized by meeting either a minimum number of houses owned or minimum cash spent. The length of the bar represents the amount of money spent by that group in the year bin. The data has been broken out by time bins of 5 years. The years 2020-2022 have been excluded because 
-				they would be underrepresented in a total due to only having 3 years of purchasing.
+				they would be underrepresented in a total due to only having 3 years of purchasing. Note that although non-investors have held relatively steady, investors have been increasing their spendings in the real estate market, driven primarily by institutional investors.
 				</figcaption>
 			</figure>
 
+			<p>
+				This confirms the trend of large institutional investors buying up a lot of properties past the naturally occuring rate that we expect to see from the MAPC readings. The natural next step to is to investigate how
+				the cash is flowing among these investors.
+			</p>
 		</section>
 
 		<section>
@@ -156,7 +161,7 @@
 				<figcaption>
 				Flow of cash and properties between types of investors. The left column of each chart represents the identity of the seller of a transaction. The right column in each chart represents the identity of the buyer of the transaction.
 				The area of the flow corresponds to the amount of cash or property exchanged. We note that, surprisingly, the different kind of investors primarily move assets among themselves. We notice that a notable exception is that small investors
-				and non-investors often exhange assets as an exception to this rule.
+				and non-investors often exhange assets.
 				</figcaption>
 			</figure>
 
@@ -181,7 +186,16 @@
 				</figcaption>
 			</figure>
 
-			<p>This is in retrospect unsurprising. One of the definitions we used for categorizing investor size was the amount the spent. So by definition investors buying expensive properties would be larger.</p>
+			<p>
+				Indeed, the largest investors are purchasing the most expensive properties, explaining the different indicators we found before. Therefore, even though they don't show up on paper as owning a huge number of houses, the largest investors may own a few 
+				multi million dollar apartment complexes that might only count as "one building," or serve some other purpose like a mall. This trend is extremely well resolved in the flow charts, even too well for normal data.
+				Further thinking reveals that this is in retrospect unsurprising. One of the definitions we used for categorizing investor size was the amount the spent. So by definition investors buying expensive properties would be larger.
+				So a medium firm that suddenly bought a $100,000,000 property would then be considered an institutional firm by definition, likely yielding this strong signal in the data.
+			</p>
+
+			<p>
+				But if we hold to our definitions, then yes, there does appear to be a submarket, and properties do indeed seem to flow within these channels.
+			</p>
 
 		</section>
 
@@ -197,7 +211,12 @@
 				</figcaption>
 			</figure>
 
-			<p>Do certain houses flip more? </p>
+			<p>
+				We know that flipping is becoming an increasingly common occurance in the housing market. But what kind of houses are being flipped?
+				We know now that investors tend to stick in their channels, so in addition to the motivations given in the question statement, are homes that are flipped more likely to be continually reflipped?
+				If there are some time correlation, we should be able to see this by looking at the conditional chances of a house getting flipped based on if it was flipped already. Note that this does not give
+				us an idea about spatial correlations like whether a certain area is more likely to be flipped.
+			</p>
 
 			<figure>
 				<img src="images/Bar_Flipping.png" alt="" />
@@ -214,23 +233,27 @@
 
 			<p>
 				I've included two visualizations because they tell slightly different stories. When placed on top of each other, the bar graph highlights
-				the difference to make it obvious that the chances are different. 1.6x and 1.3x more likely are pretty obvious on a bar graph. However, we were interested
+				the difference to make it obvious that the chances are different. 1.6x and 1.3x are pretty obvious on a bar graph. However, we were interested
 				in whether a submarket exists for these homes to be continually flipped. When put on pie charts, the percentages are still there but its much less profound because we lose the contrast of the data being stacked right next to each other.
 				I also note the samples size on the pie chart, which was significantly decreasing due to the nature of taking a small percent of a small percent. So the pie chart provides some caution against only looking at contrast.
-				In the previous sections, we saw a submarket (investor size) that was nearly completely trading within itself. Here the difference is small relative to the effect we saw there. So I come to the following conclusions:
+				In the previous sections, we saw a submarket (investor size) that was nearly completely trading within itself. Here the difference is small relative to the effect we saw there. There is no "cascade" of flipping that would result. So I come to the following conclusions:
 			</p>
 
 			<ol>
 				<li>It is more likely for a flipped property to be flipped again</li>
 				<li>Continuously flipped properties only constitute a weak submarket. This does not occur at a high enough rate (in only 9.27% of cases) for this to constitute an strong submarket.</li>
 			</ol>
+
+			One caveat to the above analysis is that we have defined flipping as a resale within 2 years. Because flipping is a more recent development, if a house was first flipped in 2020, it's 
+			unlikely that it would flip for a third time simply because the data does not continue past 2022. So the statistical bias from the recency of the flipping practice makes a time correlation
+			more difficult to resolve. Even if it is actually there, it might not have had time to develope to where we could see it.
 		</section>
 
 		<section>
 			<h2>Influence of Freddie Mac and Fannie Mae</h2>
 			<p>
 				The data conveniently has a flag for whether the property was bought/sold by a Government Sponsored Entity (GSE). In their metadata, they say this simply means that the buyer/seller was Freddie Mac or Fannie Mae.
-				So as a first step lets look at this data
+				So as a first step lets look at data with this signal.
 			</p>
 			<figure>
 				<img src="images/GSE_Low_Numbers.png" alt="" />
@@ -242,7 +265,7 @@
 
 			<p>
 				Based on the propublica article, I was expecting that there would be a huge number of Freddie Mac and Freddie Mae properties. For example, the article says that Freddie Mac and Fannie Mae participated in many deals in recent years that
-				were, "The deals were massive, involving thousands of apartments and multiple states" (propublica, https://www.propublica.org/article/when-private-equity-becomes-your-landlord). So where are all those houses?
+				were, "massive, involving thousands of apartments and multiple states" (propublica, https://www.propublica.org/article/when-private-equity-becomes-your-landlord). So where are all those houses?
 				It's not just that there are a small number of purchases in recent years, there are absolutely 0 since 2015. The chances that Freddie Mac and Fannie Mae were purchasing thousands of houses and not one was in this dataset
 				are astronomically low. Something is wrong here.
 			</p>
@@ -263,7 +286,7 @@
 
 			<p>
 				That would explain the uptick following the recession where there were a lot of foreclosures. But it again raises the question of why are there no datapoints after 2015? I again looked into this with a combination of google and Gemini
-				and discovered that Freddie Mac changed their policy for REO in 2015 to get rid of these properties when the loans were not performing (Lane, https://www.housingwire.com/articles/33450-fannie-mae-to-sell-non-performing-loans/).
+				and discovered that Freddie Mac and Fannie Mae changed their policy for REO in 2015 to get rid of these properties when the loans were not performing (Lane, https://www.housingwire.com/articles/33450-fannie-mae-to-sell-non-performing-loans/).
 				These are called non performing loans (NPLs) and are categorized when the loans are delinquent and are likely to default. The change in policy allowed Freddie Mac and Fannie Mae to sell their NPLs BEFORE the foreclosure process.
 				This led to sell offs of huge numbers of NPLs before they were foreclosed on ( https://www.fanniemae.com/newsroom/fannie-mae-news/fannie-mae-announces-initial-sale-non-performing-loans, https://freddiemac.gcs-web.com/news-releases/news-release-details/freddie-mac-executes-largest-ever-sale-seriously-delinquent/)
 				Therefore, since our signal is only houses that make it all the way past the point of a foreclosure auction, we lose our signal. Let's represent this as a timeline.
@@ -293,7 +316,11 @@
 			</figure>
 
 			<p>
-				So, if now Freddie Mac and Fannie Mae are selling off their NPLs, who is buying them? This quesition cannot be answered with the dataset by definition,
+				And yes, most properties are sold off quickly, aligning with the scenerio I had described before. It's likely that Freddie Mac and Fannie Mae are selling off the mortages for NPLs before
+				they get foreclosed on, explaining our loss of signal in 2015.
+			</p>
+			<p>
+				So, if Freddie Mac and Fannie Mae began selling off their NPLs in 2015, who is buying them? This question cannot be answered with the dataset by definition (we lose the signal, afterall),
 				but I looked into this and found agreement with the propublica article. A huge number of these are being bought up by large institutions like Goldman Sachs (https://www.mpamag.com/us/specialty/commercial/goldman-sachs-fannie-maes-biggest-buyer-of-non-performing-loans/63005) 
 				and PE firms (https://freddiemac.gcs-web.com/news-releases/news-release-details/freddie-mac-sells-11-billion-seriously-delinquent-loans/).
 				So, why are large PE investors snapping up thousands of loans which were likely headed to foreclosure? With the explosion of flipping, it's likely they are
@@ -327,7 +354,7 @@
 			<h2>Appendix A: Data Cleaning</h2>
 
 			<p>
-				I also noticed several $1 houses. So I filtered those out by requiring the price to be at least $10000. I also note that the max value allowed appeared to be $999,999,999, which had 1 entry. However, after googling this one, it was actually sold for $1.58 billion so it is legitimate, even if 50% off.
+				I noticed several $1 houses. So I filtered those out by requiring the price to be at least $10000. I also note that the max value allowed appeared to be $999,999,999, which had 1 entry. However, after googling this one, it was actually sold for $1.58 billion so it is legitimate, even if 50% off.
 			</p>
 				Note below the map with many 0,0 lat and long entries. They still have the address and zip code for me to generate their lat and longs. I don’t want to get rid of this data because these also tend to be very expensive buildings in the heart of boston. 
 				I pulled their addresses and fed them through a program to generate their latitudes and longitudes. I then added those lat and long to the dataset to complete it.
@@ -344,7 +371,7 @@
 			</figure>
 
 			<p>
-				There were also 33 Union Park addresses that I excluded because they were entered in near Rockport therefore either had the wrong lat and long, or theyre actually not in Boston so we don’t care about them.
+				There were also 33 Union Park addresses that I excluded because they were entered in near Rockport therefore either had the wrong lat and long, or they're actually not in Boston so we don’t care about them.
 			</p>
 
 			<figure>
