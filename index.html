@@ -326,14 +326,45 @@
 		<section>
 			<h2>Appendix A: Data Cleaning</h2>
 
+			<p>
+				I also noticed several $1 houses. So I filtered those out by requiring the price to be at least $10000. I also note that the max value allowed appeared to be $999,999,999, which had 1 entry. However, after googling this one, it was actually sold for $1.58 billion so it is legitimate, even if 50% off.
+			</p>
+				Note below the map with many 0,0 lat and long entries. They still have the address and zip code for me to generate their lat and longs. I don’t want to get rid of this data because these also tend to be very expensive buildings in the heart of boston. 
+				I pulled their addresses and fed them through a program to generate their latitudes and longitudes. I then added those lat and long to the dataset to complete it.
+			<p>
+
+			</p>
+
 			<figure>
 				<img src="images/EquatorEntries.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Erroneous latitudes and longitudes. Note that there are many duplicated zip codes, meaning that there is a correlation in the location these come from.
+				(Not pictured) There was also a bias towards higher price, so excluding them would have biased the data on 2 correlations.
 				</figcaption>
 			</figure>
 
-			<p>WRITE FINAL SUMMARY HERE.</p>
+			<p>
+				There were also 33 Union Park addresses that I excluded because they were entered in near Rockport therefore either had the wrong lat and long, or theyre actually not in Boston so we don’t care about them.
+			</p>
+
+			<figure>
+				<img src="images/Rockport_Addresses.png" alt="" />
+				<figcaption>
+				33 erroneous addresses set to Rockport instead of Boston.
+				</figcaption>
+			</figure>
+
+			<p>
+				I also cleaned up the zip codes for some visualizations that didn't make it into this website. There were 4 unrecognized zip codes, likely due to misentry.
+				For example, 02024 is likely supposed to be 02124 for Dorchester. I cross checked these with the addresses. In fact, usually it was the same address being entered wrong several times in a row. The above 02251 should be 02215 when I look up the address and so on.
+				There were only 6 unique addresses so I just filtered them out of the data.
+			</p>
+			<figure>
+				<img src="images/Erroneous_Zips.png" alt="" />
+				<figcaption>
+				A few zip codes which do not exist in Boston.
+			</figure>
+			
 		</section>
 	</main>
 </body>
