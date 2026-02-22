@@ -23,9 +23,9 @@
 			<h3>Overall Analysis Questions</h3>
 			<ol>
 				<li> How does money flow differently between the different sized investors? How is property distributed?</li>
-					<p>I would expect institutional and large investors to be buying up a lot of properties from MAPC's article saying, “Institutional and large investors are
+					<p>I would expect institutional and large investors to be buying up a lot of properties from MAPC's article saying the same statement, “Institutional and large investors are
 						buying up large swaths of properties at a discount and flipping them at a premium, further adding to the rapid increases in prices around the region”
-						(MAPC, https://homesforprofit.mapc.org/report). But we don’t get an idea about small and medium investors and how the interact with non-investors. Also we don’t know what happens in this submarket, do things flow through all channels or do firms only trade with others of their size?</p>
+						(MAPC, https://homesforprofit.mapc.org/report). But we don’t get an idea about small and medium investors and how they interact with non-investors. Also we don’t know what happens in this submarket, do things flow through all channels or do firms have preferences for trading?</p>
 				<li>Are specific homes more likely to be commodified than others in a time correlated way? Is there some transition point where once a property is commodified by getting flipped once, then that house continues to be used as a commodity? In other words, does an investor purchase set off a cascade of further investor purchases?</li>
 					<p>After flipping, the price is higher than it once was, pricing out regular people. This comes from the idea that, “We see the large gap in median prices start to form after the Great Recession and peak in 2020. Second, homes that are flipped are re-sold at a higher price, significantly higher when an investor is doing the flipping (as shown in Figure 19). These dynamics combined—purchasing at a discount and flipping at a profit—make it hard, if not impossible, for an average family to purchase in the market.” (MAPC, https://homesforprofit.mapc.org/report). Is it then true that the people who would be willing and able to buy these houses are primarily other investment firms? The expectation would be that once a house is flipped, it moves primarily between investors. Additionally, since “investors are likely to purchase properties from the existing housing stock instead of more expensive new construction. This further leads to the existing, more naturally affordable housing stock moving out of reach for the typical buyer.” (MAPC, https://homesforprofit.mapc.org/report). So does a submarket of these homes exist?</p>
 				<li>What impact does Freddie Mac and Fannie Mae have on wealth contraction in the Boston Housing Market? How is the liquidity actually being provided to the market?</li>
@@ -107,9 +107,20 @@
 				<img src="images/General Distribution of housing prices.png" alt="" />
 				<figcaption>
 					Number of distinct properties broken down by price bin. The size and color of each bubble corresponds to the number of distinct addresses falling into that bin. If an address was bought multiple
-					times, then the most recent value after being adjusted for inflation was used. Surprising to see an uptick in the $1,000,000-$5,000,000 group, but likely the values are too spread.
+					times, then the most recent value after being adjusted for inflation was used. It is surprising to see an uptick in the $1,000,000-$5,000,000 group, but likely the value bins are too spread.
 				</figcaption>
 			</figure>
+
+			<p>
+				I've bined the property prices arbitrarily, representing what I think would be reasonable ranges for common different levels of wealth. The most common property sale fell into the $300,000-600,000 range by far.
+				It was surprising to see that there were so many homes for less than $300,000 in geographic areas I typically consider expensive to live in from my personal experience. It was also surprising to see so many $1,000,000-5,000,000
+				properties. Overall, the properties were well distributed in the bins, indicating that I picked approximately even distributions in property while still giving room for bins which should be less populated such as $20,000,000+.
+			</p>
+
+			<p>
+				If big corporations are buying up tons of houses, we should see that there are an overrepresented number of houses owned by entities that own large batches of properties. Let's compare
+				the housing share by number of houses that a buyer owned.
+			</p>
 
 			<figure>
 				<img src="images/Tot_owned_market_share.png" alt="" />
@@ -281,7 +292,8 @@
 				</figcaption>
 			</figure>
 
-			<p>So, if now Freddie Mac and Fannie Mae are selling off their NPLs, who is buying them? This quesition cannot be answered with the dataset by definition,
+			<p>
+				So, if now Freddie Mac and Fannie Mae are selling off their NPLs, who is buying them? This quesition cannot be answered with the dataset by definition,
 				but I looked into this and found agreement with the propublica article. A huge number of these are being bought up by large institutions like Goldman Sachs (https://www.mpamag.com/us/specialty/commercial/goldman-sachs-fannie-maes-biggest-buyer-of-non-performing-loans/63005) 
 				and PE firms (https://freddiemac.gcs-web.com/news-releases/news-release-details/freddie-mac-sells-11-billion-seriously-delinquent-loans/).
 				So, why are large PE investors snapping up thousands of loans which were likely headed to foreclosure? With the explosion of flipping, it's likely they are
@@ -292,7 +304,18 @@
 			<h2>Summary</h2>
 
 			<p>
+				I was able to determine that actually yes, there appears to be clear submarkets that investors channel their cash through broken down by size of the investor. We also noted that invested properties
+				do not really mix between different sized investors. Although much of this can be attributed to how we have defined the size of the investor through their total value of properties.
 
+			</p>
+
+			<p>
+				It appears that once a home is flipped, it is 1.6x more likely to get flipped again, and then 1.3x more likely to be flipped "again again." However, the absolute percentage chances are still small,
+				only 9.3% and 7.8% as compared to the normal 5.9%. While flipping does have some kind of time correlation, it is not strong enough to establish the same kind of submarket we observed based on investor
+				size and property price. So there exist a weak submarket where homes are reflipped but getting flipped once does not cause cascades of flippings.
+			</p>
+
+			<p>
 
 				I was not able to directly answer my question about how Freddie Mac and Fannie Mae are contributing to wealth contraction in Boston because I couldn't find enough data in the dataset. However,
 				I did uncover an oddity in the data which led me to an interesting explanation involving the selloff of delinquent loans to large firms. I believe this practice definitionally fits the bill
