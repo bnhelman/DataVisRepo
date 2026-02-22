@@ -143,16 +143,34 @@
 			<figure>
 				<img src="images/Investor_Flows_1.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Flow of cash and properties between types of investors. The left column of each chart represents the identity of the seller of a transaction. The right column in each chart represents the identity of the buyer of the transaction.
+				The area of the flow corresponds to the amount of cash or property exchanged. We note that, surprisingly, the different kind of investors primarily move assets among themselves. We notice that a notable exception is that small investors
+				and non-investors often exhange assets as an exception to this rule.
 				</figcaption>
 			</figure>
 
-						<figure>
+			<p>
+				The above graphs reveals a trend that I would not have expected. In general, investors "stay in their lane," trading only with firms that are of similar size to their own. This is an answer to one of the original questioned I asked "how does money flow differently between the different sized investors?"
+				<b>It would appear that there are in fact sub markets where investors are primarily buying from similar investors</b>. Why might this be? One explanation could be that different sized firms achieve different economies of scale for managing buildings. This agrees with the reading where 
+				larger firms can extract a higher profit margin. To investigate this further we would need to break down the flows by purchase price.
+			</p>
+			<p>
+				I was also surprised to see that non-investors still dominate the number of properties exchanged, even if they are losing in the cash value of those sales. This is based both on the readings claiming that investors are buying tons of property and also
+				because of the previous figure showing that investors are dominating in amount spent recently. This raises the same followup question of "What kinds of properties are the different kinds of investors buying?"
+				One explanation could be that although intitutional investors are buying few properties, they're buying expensive ones such as large buildings. Then in the data this might only count as a single property, but actually houses many apartments.
+				So to answer this question, we should further categorize these flows through channels identifying the price of the property being purchased.
+			</p>
+
+			<figure>
 				<img src="images/Investor_Flows_2.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Flow of cash and properties between types of investors, now categorized by property price. The left column of each chart represents the identity of the seller of a transaction, the middle column represents the amount paid for the property, and the right column in each chart represents the identity of the buyer of the transaction.
+				The area of the flow corresponds to the amount of cash or property exchanged. We see that institional investors primarily deal with the >$20,000,000 transactions. Then the investors down the food chain purchase cheaper properties in similar proportion.
+				Non-investors are well distributed among the types of properties but fall off when the price is >$5,000,000. We notice that the bulk of the property flow is on properties less than $1,000,000, which explains the discrepancy between property number and total spent.
 				</figcaption>
 			</figure>
+
+			<p>This is in retrospect unsurprising. One of the definitions we used for categorizing investor size was the amount the spent. So by definition investors buying expensive properties would be larger.</p>
 
 		</section>
 
@@ -162,36 +180,65 @@
 			<figure>
 				<img src="images/Flipping_Map.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+					Map depicting the explosion of flipping practices across Boston. Each pink dot represents a home that was bought within the time range then flipped.
+					The left map shows 2000-2004, where we notice few flipping occuring. Then, the right graph depicts 18 years later where we see greatly increased quantity
+					of flipping in 2018-2022. The current flipping is occuring in most of the geographic areas of Boston that we have tracked in our data.
 				</figcaption>
 			</figure>
 
+			<p>Do certain houses flip more? </p>
+
 			<figure>
 				<img src="images/Bar_Flipping.png" alt="" />
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
 			</figure>
 
 
 			<figure>
 				<img src="images/Pie Charts.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Chance of an apartment getting flipped again represented as both as bars and pies. The chance that an apartment will be flipped is 1.6x higher if it was already flipped once.
+				If it was already flipped twice, it still has a 1.3x higher likelihood of being flipped again than normal.
 				</figcaption>
 			</figure>
 
+			<p>
+				I've included two visualizations because they tell slightly different stories. When placed on top of each other, the bar graph highlights
+				the difference to make it obvious that the chances are different. 1.6x and 1.3x more likely are pretty obvious on a bar graph. However, we were interested
+				in whether a submarket exists for these homes to be continually flipped. When put on pie charts, the percentages are still there but its much less profound because we lose the contrast of the data being stacked right next to each other.
+				I also note the samples size on the pie chart, which was significantly decreasing due to the nature of taking a small percent of a small percent. So the pie chart provides some caution against only looking at contrast.
+				In the previous sections, we saw a submarket (investor size) that was nearly completely trading within itself. Here the difference is small relative to the effect we saw there. So I come to the following conclusions:
+			</p>
+
+			<ol>
+				<li>It is more likely for a flipped property to be flipped again</li>
+				<li>Continuously flipped properties only constitute a weak submarket. This does not occur at a high enough rate (in only 9.27% of cases) for this to constitute an strong submarket.</li>
+			</ol>
 		</section>
 
 		<section>
 			<h2>Influence of Freddie Mac and Fannie Mae</h2>
-
+			<p>
+				The data conveniently has a flag for whether the property was bought/sold by a Government Sponsored Entity (GSE). In their metadata, they say this simply means that the buyer/seller was Freddie Mac or Fannie Mae.
+				So as a first step lets look at this data
+			</p>
 			<figure>
 				<img src="images/GSE_Low_Numbers.png" alt="" />
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Number of properties owned by Freddie Mac or Fannie Mae each year. Each blue box represents a single property. In total, there are only 34 properties, a surprisingly small number. There are also no numbers after 2015.
+				The purchases are heavily concentrated around the years during and following the recession (2008-2012).
 				</figcaption>
 			</figure>
+
+			<p>
+				Based on the propublica article, I was expecting that there would be a huge number of Freddie Mac and Freddie Mae properties. For example, the article says that Freddie Mac and Fannie Mae participated in many deals in recent years that
+				were, "The deals were massive, involving thousands of apartments and multiple states" (propublica, https://www.propublica.org/article/when-private-equity-becomes-your-landlord). So where are all those houses?
+				It's not just that there are a small number of purchases in recent years, there are absolutely 0 since 2015. The chances that Freddie Mac and Fannie Mae were purchasing thousands of houses and not one was in this dataset
+				are astronomically low. Something is awry here.
+			</p>
+
+			<p>
+				This line of reasoning led me to 
+			</p>
 
 			<figure>
 				<img src="images/GSE_Timeline.png" alt="" />
