@@ -1,15 +1,15 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-	<title>Vis & Society Assignment 2</title>
+	<title>Vis & Society Assignment 3</title>
 	<link rel="stylesheet" href="https://vis-society.github.io/assignments/report.css" />
 </head>
 
 <body>
 	<header>
 		<h1>
-			<small>Assignment 2</small>
-			Exploratory Data Analysis
+			<small>Assignment 3</small>
+			Visualization Critique & Redesign
 		</h1>
 
 		<p>
@@ -17,20 +17,29 @@
 		</p>
 	</header>
 	<main>
-		<section>
-			<h2>Subtheme: Speculation</h2>
 
-			<h3>Overall Analysis Questions</h3>
-			<ol>
-				<li> How does money flow differently between the different sized investors? How is property distributed?</li>
-					<p>I would expect institutional and large investors to be buying up a lot of properties from MAPC's article saying the same statement, “Institutional and large investors are
-						buying up large swaths of properties at a discount and flipping them at a premium, further adding to the rapid increases in prices around the region”
-						(MAPC, https://homesforprofit.mapc.org/report). But we don’t get an idea about small and medium investors and how they interact with non-investors. Also we don’t know what happens in this submarket, do things flow through all channels or do firms have preferences for trading?</p>
-				<li>Are specific homes more likely to be commodified than others in a time correlated way? Is there some transition point where once a property is commodified by getting flipped once, then that house continues to be used as a commodity? In other words, does an investor purchase set off a cascade of further investor purchases?</li>
-					<p>After flipping, the price is higher than it once was, pricing out regular people. This comes from the idea that, “We see the large gap in median prices start to form after the Great Recession and peak in 2020. Second, homes that are flipped are re-sold at a higher price, significantly higher when an investor is doing the flipping (as shown in Figure 19). These dynamics combined—purchasing at a discount and flipping at a profit—make it hard, if not impossible, for an average family to purchase in the market.” (MAPC, https://homesforprofit.mapc.org/report). Is it then true that the people who would be willing and able to buy these houses are primarily other investment firms? The expectation would be that once a house is flipped, it moves primarily between investors. Additionally, since “investors are likely to purchase properties from the existing housing stock instead of more expensive new construction. This further leads to the existing, more naturally affordable housing stock moving out of reach for the typical buyer.” (MAPC, https://homesforprofit.mapc.org/report). So does a submarket of these homes exist?</p>
-				<li>What impact does Freddie Mac and Fannie Mae have on wealth contraction in the Boston Housing Market? How is the liquidity actually being provided to the market?</li>
-					<p>In the propublica article, there is tension between what Freddie Mac claims to do and what it actually does in practice. For example, the article simultaneously says, “A Freddie Mac spokesperson said that more than 95% of rental units backed by loans Freddie has purchased deliver market-rate rents that are affordable to low-, very-low- and middle-income households” while also claiming, “Private Equity Firms Were Behind 85% of Freddie Mac’s Biggest Apartment Complex Deals”  (Vogell, https://www.propublica.org/article/when-private-equity-becomes-your-landlord). So I should be able to verify one of the statements independently using the actual Boston housing data. Does the spokesperson’s claims misrepresent reality in the Boston market?</p>
-			</ol>
+		<section>
+			<figure>
+				<img src="A3_images/original_visualization.png" alt="" />
+				<figcaption>
+					Original visualization from the New York Times (https://www.nytimes.com/2022/01/06/opinion/omicron-covid-us.html?unlocked_article_code=1.zk4.stTQ.3bTjWtsFU-ls&smid=url-share)
+				</figcaption>
+			</figure>
+
+			<h3>Immediate insights</h3>
+			<ul>
+				<li>Looks like spiral is growing</li>
+				<li>If I squint it kind of looks stretched in the “y=x” direction. So in the summer and winter</li>
+				<li>There’s a peak in 2021 January</li>
+				<li>2020 had nothing until March</li>
+				<li>Peak right now in Jan 2022 -> January might be a bad month for covid</li>
+				<li>Troughs in 2021 June and November, 2020 September</li>
+				<li>Seems to be getting worse over time</li>			
+			</ul>
+
+			<h2>Critique</h2>
+			<p>The graphic does a few things well, in particular, it is well targeted to the audience, especially given the context of the time. The first impression the graphic makes is to get an emotional reaction by analogy. The common viewer is likely to see this data as “spiraling out of control” because it uses a literal spiral, and the viewer is likely to understand this point at a glance even if the details are a bit messy. From reading the rest of the article, I think the designers intentionally try to make this apparent. An important plus for this “at a glance” impression is that it’s different from just a line chart. At the time, we were inundated with tons and tons of line charts, and in my personal experience, many people stopped looking at them. By having some novel representation, I assume people would be more likely to stop and look at it instead of skimming. Therefore, it’s well targeted for the intended audience. By wrapping the timeline, they’re able to fit more information into the same width than a linear timeline. One effect of this is that the graphic does a decent job of not fearmongering. By placing this spike in context with past ones, we get a frame of reference from our previous experiences. This aligns with our history, “we’ve had a few spikes before” while still guiding the inference, “but it looks like this one is going to be pretty bad.” I think it encourages informed caution without panic. Mechanically, I appreciated the location and sizing of the “7-day average” label. Most people wouldn’t care about this, and it stays out of the way for them. But for those who do care, they would look for it and then it would show up. This happened to me, where I didn’t care then right at the time when I thought about how they calculated this, I noticed the 7 day average. Unfortunately, the dates are the same size as this out of the way label.</p>
+			<p>The main issue I have with the design is that it’s not immediately obvious where I should start reading. Common pop culture typically depicts “spiraling in” in the sense of a “downward spiral” for which a common first look would try to read this by going outside in. I think the arrow does not do enough to show the direction. That being said, I understand the tradeoff of having the larger areas towards the outside. Unfortunately, It took me too long to get the direction and see the months delineating the seasons. It’s clever, but I didn’t immediately recognize the year cycle, which is a very important part of the design. I think this is a significant failure and I would be willing to trade some things in to recover this. Also many people have different mental images of how the years wrap. In my mind I actually see January on the x axis with the seasons going clockwise. This is simply because this is how it was shown to me in preschool. I appreciate that I can see the whole history of the pandemic, but it seems like the article is actually only focused on January 2022. That takes up very little of the visual space. Without reading the article, I would not have guessed that this visualization was actually trying to make a prediction rather than analyze past trends. I had no idea they were talking about Omicron. However, in the context of the time, most people would probably already be aware of it. While they gain a good “at a glance” effect, they trade in ease of comparing the scale of the graph, which I find hard to understand. Yes, they have a legend, but I see this at the end after I’ve already looked at the graph for a while. It’s unclear whether the width of the legend is referring to the biggest point being 150k or that specific width being 150k. This scales the data in different ways, so I think this is a more severe failing. I would put the scalebars into the diagram itself. Even among relative values, it is still difficult to compare because I must mentally translate and rotate widths through space. For example, does February 2021 or October 2021 have more cases? It’s difficult to tell.</p>
 		</section>
 
 		<section>
