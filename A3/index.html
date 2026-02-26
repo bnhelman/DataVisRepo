@@ -43,23 +43,98 @@
 		</section>
 
 		<section>
-			<h2>Sketch 1</h2>
-		</section>
+			<h2>Sketches</h2>
 
-		<section>
-			<h2>Sketch 2</h2>
-		</section>
+			<h3>Sketch 1</h3>
 
-		<section>
-			<h2>Sketch 3</h2>
+			<figure>
+				<img src="A3_images/sketch_1.jpg" alt="" />
+				<figcaption>
+					Sketch 1
+				</figcaption>
+			</figure>
+
+			<h3>Sketch 2</h3>
+
+			<figure>
+				<img src="A3_images/sketch_2.jpg" alt="" />
+				<figcaption>
+					Sketch 2
+				</figcaption>
+			</figure>
+
+			<h3>Sketch 3</h3>
+
+			<figure>
+				<img src="A3_images/sketch_3.jpg" alt="" />
+				<figcaption>
+					Sketch 3
+				</figcaption>
+			</figure>
 		</section>
 
 		<section>
 			<h2>Final Visualization</h2>
 
+			<figure>
+				<img src="A3_images/Final_Image.png" alt="" />
+				<figcaption>
+					Final Visualization (figure calculations based on template from https://public.tableau.com/app/profile/arshad.ejaz/viz/NYTCovidSpiralChart/Dashboard)
+				</figcaption>
+			</figure>
+
 			<h2>Final Writeup</h2>
+
+			<p>
+				The main sense of identity I wanted to preserve when altering this design was that it would be a good intro graphic on a New York Times article. 
+				This means leaning towards minimalism, trying to keep annotations few, authoritative phrasing, and being eye-catching. 
+				I wanted people to stop scrolling to read my pretend article. 
+				I further contextualized my analysis towards catering to viewers living in 2022. 
+				The spiral is very well fit for this because it serves three purposes: to be novel, to represent a calendar over multiple years, and to pack in data more densely than a linear timeline. 
+				As I mentioned in my critique section, people were overwhelmed by graphics at the time, meaning an interesting graphic like the spiral stood out among the crowd, likely making people actually read it. 
+				Whereas the spiral before was an emotional worry, because we have more data, here it’s more like the spiral eyes emoji, maybe conveying a tiredness of sorts. 
+				In my second sketch, I did try to make a broken linear timeline, but it was simply too difficult to fit all the data into it, and I lost most of the sense of seasons. 
+				I added annotations for the Delta and Omicron outbreaks because I felt that this would allow people to better place each part of the graph in context with their own experiences. 
+				I made a huge black center dot to give a starting point and I removed the center crossing of the grid so that it didn’t compete for attention in the center. 
+				I felt that the areal encoding of the case number along with the darker lines in the original design was compelling and good for snapshotting a lot of data quickly, so I went with their choices. 
+				I also went with their 7-day average because it smoothed the data out and kept the attention on trends rather than noise when I tested removing it. 
+				Unfortunately, this graphic does not do a good job of comparing values directly because of the need to rotate the data through space for comparison. 
+				This was a price I paid to have novelty. The beginning area of covid is downplayed in particular because of the radius scaling of area in polar coordinates. 
+				This makes the beginning seem less important and more obscured. Although with recency biases, maybe it isn’t so bad to emphasize the most recent data.
+			</p>
+
+			<p>
+				From my sketches and critiques I targeted 3 criteria I specifically wanted to improve that I felt was worth moving away from minimalism for. 
+				In order: to know where to start reading and how to continue, know that it’s a calendar, and know what scale thickness corresponds to what number of new daily cases. The first sketch was foundational to all of these, in which I designed a single natural track for the eyes to follow using arrows. 
+				In this final  graphic, I have placed arrows along the path to both give the direction of the spiral and to hopefully constrain the viewer’s eyes. There are 3 exceptional points that are likely starting points for reading the graphic: the title, the center, and the omicron outbreak. 
+				To avoid introducing other locations, I’ve lightened the texts for 7-day average (inspired by the first sketch) and the September and August months. I’ve also left white space on all the corners except for the title corner to reduce stray entry directions into the center. 
+				The most desirable reading is first the title, from which naturally follows the scale (out of context for now), then white space, at which it’s likely the eyes are brought to another of the 2 exceptional points. Hopefully, the eyes pass over the 200k scale annotation before reaching the middle, this was intentional. 
+				Once in the middle, if the viewer did not notice the outer calendar, they will likely still see the 3 months Feb, March, April…, and they will still get the understanding of a calendar. They then next see up to 3 scattered scale bars to understand the area and give time footholds, hitting the omicron section. 
+				If they started in the omicron section, then by default they should at least know the scale. I include the August and September months as a backup for “Omicron-starters” to understand the calendar reasonably quickly. Since the months don’t continue past October, I hope that the eyes are shuttled either to the title or to the center. 
+				The three different starting points all give the viewer answers to the 3 criteria I specifically wanted to fix within a tolerable amount of time. There was a major trade off between using a novel graphic and clarity of information. It aligned better with my make-believe scenario of wanting viewers to lean into the novel graphic. 
+				In defense of the spiral graphic, a perfectly clear line chart that no one reads conveys ironically no information at all. Did you spend the time to read the line chart they provided later in the original article? 
+				In the end I was not able to find a way to have both the spiral and also convey magnitudes across points, which was part of my original critique. I tried adding a color-code like in sketch 3 (see Appendix A), which works great if you’ve already seen the original graph. 
+				However, if you don’t know how to read the graph already, there’s too much information clutter and it ends up defeating the point of a great “first glance.” The process of critique by design definitely helped by giving specific goals to work towards instead of vaguely trying to make it better.
+				By listing my priorities and values out, I had a framework to make decisions later which felt more cohesive. 
+			</p>
 		</section>
 
+		<section>
+			<h2>Data Cleanup and Transformations</h2>
+			<ul>
+				<li>Removed lone 12/31/22 date with negative cases</li>
+				<li>Implemented a 7-day moving average. Centered the point in the middle. Except for the 3 first and last points, for which I used the 7 days that were in frame. Note that this duplicates the values for that, but they represented a small fraction (6/1000) of the points</li>
+				<li>Normalized the data to the largest 7-day average (806,868)</li>
+				<li>Had to generate a new list of values index-shifted by 1 to give the curve function a way to know where to go</li>
+				<li>Had to join (cartesian product) the data with a set of {1, 2, 3, 4} to create data duplicates to make the plotting work</li>
+				<li>Rotate out by the initial data starting on Jan 13th instead of Jan 1</li>
+			</ul>
+
+		</section>
+		
+		<section>
+			<h2>Appendix A: Final Design Graveyard</h2>
+		</section>
 
 	</main>
 </body>
